@@ -1,3 +1,3 @@
-import MapboxDirections from './directions';
+import * as MapboxDirectionsGodesta from './directions';
 
-module.exports = MapboxDirections;
+module.exports = MapboxDirectionsGodesta;

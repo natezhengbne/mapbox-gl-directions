@@ -26,6 +26,25 @@ function destinationPoint(coordinates) {
   };
 }
 
+// function stopPoint(coordinates){
+//     return (dispatch) => {
+//         const stop = utils.createPoint(coordinates, {
+//             id: 'stop',
+//             'marker-symbol': 'stop'
+//         });
+//
+//         dispatch({ type: types.STOP_POINT, stop });
+//         dispatch(eventEmit('stop', { feature: stop }));
+//     };
+// }
+
+function stopPoints(stops){
+    return (dispatch) => {
+        dispatch({ type: types.STOP_POINT, stops });
+        dispatch(eventEmit('stops', { feature: stops }));
+    };
+}
+
 function setDirections(directions) {
   return dispatch => {
     dispatch({
@@ -77,12 +96,26 @@ function fetchDirections() {
           return dispatch(setError(data.error));
         }
 
+        console.log("------0000000 data from net---------> "+JSON.stringify(data))
+
         dispatch(setError(null));
         if (!data.routes[routeIndex]) dispatch(setRouteIndex(0));
         dispatch(setDirections(data.routes));
 
-        // Revise origin / destination points
+        // Revise origin
         dispatch(originPoint(data.waypoints[0].location));
+        // Stops
+        let stopArray = []
+        for(let i=0;i<data.waypoints.length-2;i++){
+            // dispatch(stopPoint(data.waypoints[i+1].location));
+            const stop = utils.createPoint(data.waypoints[i+1].location, {
+                id: 'stop',
+                'marker-symbol': 'stop'
+            });
+            stopArray.push(stop);
+        }
+        dispatch(stopPoints(stopArray))
+        // destination points
         dispatch(destinationPoint(data.waypoints[data.waypoints.length - 1].location));
       } else {
         dispatch(setDirections([]));

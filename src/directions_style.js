@@ -25,7 +25,7 @@ const style = [{
   },
   'paint': {
     'line-color': '#2d5f99',
-    'line-width': 12
+    'line-width': 1
   },
   'filter': [
     'all',
@@ -53,7 +53,7 @@ const style = [{
         ['severe', '#8b2342']
       ]
     },
-    'line-width': 7
+    'line-width': 2
   },
   'filter': [
     'all',
@@ -105,7 +105,7 @@ const style = [{
   'source': 'directions',
   'paint': {
     'circle-radius': 6,
-    'circle-color': '#8a8bc9'
+    'circle-color': '#8b2342'
   },
   'filter': [
     'all',
@@ -131,7 +131,7 @@ const style = [{
   'source': 'directions',
   'layout': {
     'text-field': 'A',
-    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+    'text-font': ['Open Sans Bold'],
     'text-size': 12
   },
   'paint': {
@@ -161,7 +161,7 @@ const style = [{
   'source': 'directions',
   'layout': {
     'text-field': 'B',
-    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+    'text-font': ['Open Sans Bold'],
     'text-size': 12
   },
   'paint': {
@@ -172,6 +172,19 @@ const style = [{
     ['in', '$type', 'Point'],
     ['in', 'marker-symbol', 'B']
   ]
+},{
+    'id': 'directions-waypoint-stop',
+    'type': 'circle',
+    'source': 'directions',
+    'paint': {
+    'circle-radius': 6,
+        'circle-color': '#8a8bc9'
+    },
+    'filter': [
+        'all',
+        ['in', '$type', 'Point'],
+        ['in', 'id', 'stop']
+]
 }];
 
 export default style;

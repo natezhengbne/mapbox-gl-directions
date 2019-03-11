@@ -33,6 +33,7 @@ const initialState = {
 
   // Marker feature drawn on the map at any point.
   origin: {},
+  stops: [],
   destination: {},
   hoverMarker: {},
   waypoints: [],
@@ -64,11 +65,17 @@ function data(state = initialState, action) {
       hoverMarker: {}
     });
 
+  case types.STOP_POINT:
+      return Object.assign({}, state, {
+          stops: action.stops,
+          hoverMarker: {}
+      });
+
   case types.DESTINATION:
-    return Object.assign({}, state, {
-      destination: action.destination,
-      hoverMarker: {}
-    });
+  return Object.assign({}, state, {
+    destination: action.destination,
+    hoverMarker: {}
+  });
 
   case types.HOVER_MARKER:
     return Object.assign({}, state, {

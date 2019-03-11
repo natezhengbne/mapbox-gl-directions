@@ -162,6 +162,7 @@ export default class MapboxDirections {
     this.storeUnsubscribe = store.subscribe(() => {
       const {
         origin,
+        stops,
         destination,
         hoverMarker,
         directions,
@@ -179,6 +180,11 @@ export default class MapboxDirections {
         })
       };
 
+      if(stops!=null){
+          console.log('******stops**********'+JSON.stringify(stops))
+          stops.forEach((stopNode)=>{geojson.features.push(stopNode)})
+
+      }
       if (directions.length) {
         directions.forEach((feature, index) => {
 
@@ -239,6 +245,8 @@ export default class MapboxDirections {
         });
       }
 
+
+      console.log("------geojson 2.---------> "+JSON.stringify(geojson))
       if (this._map.style && this._map.getSource('directions')) {
         this._map.getSource('directions').setData(geojson);
       }
